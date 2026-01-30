@@ -1,0 +1,17 @@
+flask
+flask-cors
+python-dotenv
+google-generativeai
+
+# OCR
+pytesseract
+pillow
+pdf2image
+
+# Vector search
+pinecone-client
+sentence-transformers
+torch
+
+# Production server
+gunicorn

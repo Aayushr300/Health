@@ -1,0 +1,44 @@
+name: Deploy Backend to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/Health
+
+            # Pull latest code
+            git pull origin main
+
+            # Go into backend only
+            cd backend
+
+            # Activate virtualenv (if exists)
+            if [ -d "venv" ]; then
+              source venv/bin/activate
+            else
+              python3 -m venv venv
+              source venv/bin/activate
+            fi
+
+            # Install backend dependencies
+            pip install --upgrade pip
+            pip install -r requirements.txt
+
+            # Restart backend (choose one)
+            pm2 restart backend || pm2 start app.py --name backend
