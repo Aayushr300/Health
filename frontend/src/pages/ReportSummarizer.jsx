@@ -34,7 +34,7 @@ const ReportSummarizer = () => {
     const formData = new FormData();
     formData.append("report", selectedFile); // ✅ MUST be "report"
 
-    const response = await fetch("http://13.62.95.45:5000/api/report", {
+    const response = await fetch("https://grocery.offershubs.in/api/report", {
       method: "POST",
       body: formData,
     });
