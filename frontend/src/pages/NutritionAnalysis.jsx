@@ -56,7 +56,7 @@ const NutritionAnalysis = () => {
         : "none",
     };
 
-    const response = await fetch("http://localhost:8080/api/nutrition", {
+    const response = await fetch("https://grocery.offershubs.in/api/nutrition", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
