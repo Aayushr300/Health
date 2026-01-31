@@ -112,15 +112,15 @@ const Register = () => {
         <h2 className="text-2xl font-semibold mb-4 text-foreground">Create an account</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label>Name</Label>
+            <Label className="block text-left mb-2">Name</Label>
             <Input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" required />
           </div>
           <div>
-            <Label>Email</Label>
+            <Label className="block text-left mb-2" >Email</Label>
             <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" required />
           </div>
           <div>
-            <Label>Password</Label>
+            <Label className="block text-left mb-2">Password</Label>
             <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" required />
           </div>
           <div className="pt-2">
