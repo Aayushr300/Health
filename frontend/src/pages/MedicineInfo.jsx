@@ -5,6 +5,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+
 const MedicineInfo = () => {
   const navigate = useNavigate();
   const {
@@ -144,11 +149,14 @@ const MedicineInfo = () => {
               </CardDescription>
             </CardHeader>
            <CardContent>
-  {medicineInfo ? (
-    <div className="whitespace-pre-wrap text-sm bg-muted/50 p-4 rounded-lg leading-relaxed">
+ {medicineInfo ? (
+  <div className="prose prose-sm max-w-none bg-muted/50 p-4 rounded-lg">
+    <ReactMarkdown remarkPlugins={[remarkGfm]}>
       {medicineInfo}
-    </div>
-  ) : (
+    </ReactMarkdown>
+  </div>
+) : (
+
     <div className="text-center py-12 text-muted-foreground">
       <Pill className="h-12 w-12 mx-auto mb-4 opacity-50" />
       <p>Scan a medicine image to see details here</p>

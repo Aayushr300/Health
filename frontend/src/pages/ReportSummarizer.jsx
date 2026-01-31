@@ -4,6 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+
+
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+
 const ReportSummarizer = () => {
   const navigate = useNavigate();
   const {
@@ -145,14 +151,19 @@ const ReportSummarizer = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {analysisResult ? <div className="prose prose-sm max-w-none">
-                  <div className="whitespace-pre-wrap text-sm bg-muted/50 p-4 rounded-lg">
-                    {analysisResult}
-                  </div>
-                </div> : <div className="text-center py-12 text-muted-foreground">
-                  <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p>Upload and analyze a medical report to see results here</p>
-                </div>}
+              {analysisResult ? (
+  <div className="prose prose-sm max-w-none bg-muted/50 p-4 rounded-lg leading-relaxed">
+    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+      {analysisResult}
+    </ReactMarkdown>
+  </div>
+) : (
+  <div className="text-center py-12 text-muted-foreground">
+    <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
+    <p>Upload and analyze a medical report to see results here</p>
+  </div>
+)}
+
             </CardContent>
           </Card>
         </div>
